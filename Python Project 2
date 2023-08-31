@@ -1,0 +1,278 @@
+import tsapp
+import random
+
+window = tsapp.GraphicsWindow()
+background = tsapp.Sprite("SpaceAsteroid.jpg", 0, 0)
+
+"""
+walk = tsapp.Sprite("AstronautWalk.png", 10, 10)
+stand = tsapp.Sprite("AstronautStand.png", 10, 10)
+spin = tsapp.Sprite("AstronautSpin.png", 10, 10)
+push = tsapp.Sprite("AstronautPush.png", 10, 10)
+lift = tsapp.Sprite("AstronautLift.png", 10, 10)
+kick = tsapp.Sprite("AstronautKick.png", 10, 10)
+"""
+#start = tsapp.Sprite("AstronautStand.png", 10, 10)TapeLabel.png
+
+astro = tsapp.Sprite("AstronautStand.png", 10, 10)
+
+alien1 = tsapp.Sprite("AlienBack1.png", 10, 10)
+alien3 = tsapp.Sprite("AlienBack3.png", 10, 10)
+alien4 = tsapp.Sprite("AlienBack4.png", 10, 10)
+alien6 = tsapp.Sprite("AlienBack6.png", 10, 10)
+beetle = tsapp.Sprite("AlienBeetle.png", 10, 10)
+bush = tsapp.Sprite("AlienBush.png", 100, 70)
+bush2 = tsapp.Sprite("AlienBush.png", 100, 70)
+tree1 = tsapp.Sprite("AlienTree.png", 200, 200)
+tree2 = tsapp.Sprite("AlienTree2.png", 150, 150)
+tree3 = tsapp.Sprite("AlienTree.png", 200, 200)
+tree4 = tsapp.Sprite("AlienTree2.png", 150, 150)
+
+
+window.add_object(background)
+window.add_object(astro)
+
+window.add_object(alien1)
+window.add_object(alien3)
+window.add_object(alien4)
+window.add_object(alien6)
+window.add_object(beetle)
+window.add_object(bush)
+window.add_object(bush2)
+window.add_object(tree1)
+window.add_object(tree2)
+window.add_object(tree3)
+window.add_object(tree4)
+
+"""
+walk.scale = 0.3
+stand.scale = 0.3
+spin.scale = 0.3
+push.scale = 0.3
+lift.scale = 0.3
+kick.scale = 0.3
+"""
+astro.scale = 0.3
+
+alien1.scale = 0.8
+alien3.scale = 0.8
+alien4.scale = 0.8
+alien6.scale = 0.8
+beetle.scale = 0.3
+bush.scale = 0.3
+bush2.scale = 0.3
+tree1.scale = 0.3
+tree2.scale = 0.3
+tree3.scale = 0.3
+tree4.scale = 0.3
+
+
+
+alien1.x = random.randint(60, 130)
+alien1.y = random.randint(100, 180)
+alien3.x = random.randint(140, 240)
+alien3.y = random.randint(245, 350)
+alien4.x = random.randint(250, 350)
+alien4.y = random.randint(365, 470)
+alien6.x = random.randint(360, 460)
+alien6.y = random.randint(125, 230 )
+beetle.x = random.randint(470, 570)
+beetle.y = random.randint(245, 350)
+bush.x = random.randint(580, 680)
+bush.y = random.randint(365, 470)
+bush2.x = random.randint(690, 790)
+bush2.y = random.randint(125, 230)
+tree1.x = random.randint(690, 790)
+tree1.y = random.randint(125, 230)
+tree2.x = random.randint(800, 900)
+tree2.y = random.randint(245, 350)
+tree3.x = random.randint(60, 240)
+tree3.y = random.randint(230, 245)
+tree4.x = random.randint(270, 500)
+tree4.y = random.randint(350, 365)
+
+    
+window.finish_frame()
+print("How do you want to deal with the opponent? \nPress K to kick \nPress L to lift \nPress P to push")
+while window.is_running :
+    
+    ## -- X axis -- ##
+    if tsapp.is_key_down(tsapp.K_RIGHT):
+        astro.x_speed = 150
+        astro.flip_x = False
+    elif tsapp.is_key_down(tsapp.K_LEFT):
+        astro.x_speed = -150
+        astro.flip_x = True
+    else:
+        astro.x_speed = 0
+        
+    ## -- Y axis -- ##
+    if tsapp.is_key_down(tsapp.K_UP) and astro.center_y > 130:
+        astro.y_speed = -150
+    elif tsapp.is_key_down(tsapp.K_DOWN):
+        astro.y_speed = 150
+    else:
+        astro.y_speed = 0
+    
+    ## -- Any movement -- ##
+    if tsapp.is_key_down(tsapp.K_RIGHT) or tsapp.is_key_down(tsapp.K_LEFT) or tsapp.is_key_down(tsapp.K_UP) or tsapp.is_key_down(tsapp.K_DOWN):
+        astro.image = "AstronautWalk.png"
+    else:
+        astro.image = "AstronautStand.png"
+        
+    ## -- Colliding Sprite Walls -- ##
+    if not astro.is_colliding_rect(bush) and not astro.is_colliding_rect(bush2) and not astro.is_colliding_rect(tree1) and not astro.is_colliding_rect(tree2) and not astro.is_colliding_rect(tree3) and not astro.is_colliding_rect(tree4) :
+        astro_last_x = astro.center_x
+        astro_last_y = astro.center_y
+        
+    if astro.is_colliding_rect(bush) or astro.is_colliding_rect(bush2) or astro.is_colliding_rect(tree1) or astro.is_colliding_rect(tree2) or astro.is_colliding_rect(tree3) or astro.is_colliding_rect(tree4) :
+        astro.center_x = astro_last_x 
+        astro.center_y = astro_last_y 
+        print("Watch where you're going!")
+        
+    ## -- Colliding with Sprite aliens -- ##
+    
+    if astro.is_colliding_rect(alien1) : 
+        #print("How do you want to deal with the opponent? \nPress K to kick \nPress L to lift \nPress P to push")
+        
+        if tsapp.is_key_down(tsapp.K_k):
+            astro.image = "AstronautKick.png"
+            alien1.x_speed = 30
+            alien1.y_speed = -30
+            alien1.visible = False
+                          
+        if tsapp.is_key_down(tsapp.K_l):
+            astro.image = "AstronautLift.png"
+            alien1.y_speed = -30
+            alien1.visible = False
+                
+        if tsapp.is_key_down(tsapp.K_p):
+            astro.image = "AstronautPush.png"
+            alien1.x_speed = 30
+            alien1.visible = False
+            
+    if astro.is_colliding_rect(alien3) :
+        #print("How do you want to deal with the opponent? \nPress K to kick \nPress L to lift \nPress P to push")
+        
+        if tsapp.is_key_down(tsapp.K_k):
+            astro.image = "AstronautKick.png"
+            alien3.x_speed = 30
+            alien3.y_speed = -30
+            alien3.visible = False
+                          
+        if tsapp.is_key_down(tsapp.K_l):
+            astro.image = "AstronautLift.png"
+            alien3.y_speed = -30
+            alien3.visible = False
+                
+        if tsapp.is_key_down(tsapp.K_p):
+            astro.image = "AstronautPush.png"
+            alien3.x_speed = 30
+            alien3.visible = False
+        
+    if astro.is_colliding_rect(alien4) :
+        #print("How do you want to deal with the opponent? \nPress K to kick \nPress L to lift \nPress P to push")
+        
+        if tsapp.is_key_down(tsapp.K_k):
+            astro.image = "AstronautKick.png"
+            alien4.x_speed = 30
+            alien4.y_speed = -30
+            alien4.visible = False
+                          
+        if tsapp.is_key_down(tsapp.K_l):
+            astro.image = "AstronautLift.png"
+            alien4.y_speed = -30
+            alien4.visible = False
+                
+        if tsapp.is_key_down(tsapp.K_p):
+            astro.image = "AstronautPush.png"
+            alien4.x_speed = 30
+            alien4.visible = False
+            
+    if astro.is_colliding_rect(alien6) :
+        #print("How do you want to deal with the opponent? \nPress K to kick \nPress L to lift \nPress P to push")
+        
+        if tsapp.is_key_down(tsapp.K_k):
+            astro.image = "AstronautKick.png"
+            alien6.x_speed = 30
+            alien6.y_speed = -30
+            alien6.visible = False
+                          
+        if tsapp.is_key_down(tsapp.K_l):
+            astro.image = "AstronautLift.png"
+            alien6.y_speed = -30
+            alien6.visible = False
+                
+        if tsapp.is_key_down(tsapp.K_p):
+            astro.image = "AstronautPush.png"
+            alien6.x_speed = 30
+            alien6.visible = False
+            
+    if astro.is_colliding_rect(beetle) :
+        #print("How do you want to deal with the opponent? \nPress K to kick \nPress L to lift \nPress P to push")
+        
+        if tsapp.is_key_down(tsapp.K_k):
+            astro.image = "AstronautKick.png"
+            beetle.x_speed = 30
+            beetle.y_speed = -30
+            beetle.visible = False
+                          
+        if tsapp.is_key_down(tsapp.K_l):
+            astro.image = "AstronautLift.png"
+            beetle.y_speed = -30
+            beetle.visible = False
+                
+        if tsapp.is_key_down(tsapp.K_p):
+            astro.image = "AstronautPush.png"
+            beetle.x_speed = 30
+            beetle.visible = False
+            
+ 
+    if alien1.visible == False and alien3.visible == False and alien4.visible == False and alien6.visible == False and beetle.visible == False :
+        print("You have defeated all of the aliens!")
+        print("Now go and fetch your treasure!")
+        
+        break
+        
+    window.finish_frame()
+        
+treasure = tsapp.Sprite("TreasureChestTopAngle.png", 150, 150) 
+treasure.scale = 0.3
+treasure.x = random.randint(100, 1000)
+treasure.y = random.randint(125, 400)
+window.add_object(treasure)
+
+while window.is_running :
+    
+    ## -- X axis -- ##
+    if tsapp.is_key_down(tsapp.K_RIGHT):
+        astro.x_speed = 150
+        astro.flip_x = False
+    elif tsapp.is_key_down(tsapp.K_LEFT):
+        astro.x_speed = -150
+        astro.flip_x = True
+    else:
+        astro.x_speed = 0
+        
+    ## -- Y axis -- ##
+    if tsapp.is_key_down(tsapp.K_UP) and astro.center_y > 130:
+        astro.y_speed = -150
+    elif tsapp.is_key_down(tsapp.K_DOWN):
+        astro.y_speed = 150
+    else:
+        astro.y_speed = 0
+    
+    ## -- Any movement -- ##
+    if tsapp.is_key_down(tsapp.K_RIGHT) or tsapp.is_key_down(tsapp.K_LEFT) or tsapp.is_key_down(tsapp.K_UP) or tsapp.is_key_down(tsapp.K_DOWN):
+        astro.image = "AstronautWalk.png"
+    else:
+        astro.image = "AstronautStand.png"
+        
+        
+    if astro.is_colliding_rect(treasure) :
+        astro.image = "AstronautSpin.png"
+        astro.image_animation_rate = 100
+        print("Congratulations! You have won the game!")
+        break
+        
+    window.finish_frame()
