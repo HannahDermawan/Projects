@@ -1,0 +1,65 @@
+#Breach Bot 
+breachYear = 2019
+
+#Greets user
+print("Hello! I'm Breach Bot.")
+userName = input("What is your name?\n")
+print("Nice to meet you " + userName)
+
+#Recounts year of breach
+todaysYear = input("What year is it?\n")
+timePassed = int(todaysYear) - breachYear
+print("Wow! That means it has been " + str(timePassed) + " years since the Facebook data breach began!")
+
+#Introduces breach
+print("Would you like to learn about the Facebook 2019 data breach?")
+giveInfo = input("Type 'yes' or 'no'\n")
+
+#Explains breach
+while giveInfo.lower() == "yes":
+  print("What would you like to learn more about? Enter the lowercase letter of the following options: \n(a) breach details, (b) organization's response, or (c) I would like to hear your reflection.")
+  topic = input()
+  
+  if topic.lower() == "a":
+    print("Personal information of 533 million people was stolen from Facebook including names, addresses, email addresses, login details, phone numbers and other details from user profiles. It was hacked by malicious actors who exploited a weakness in the feature, who then leaked these datas to the dark web.")
+  
+  elif topic.lower() == "b":
+    print("Facebook found and fixed the route the malicious actors used to scrape datas. However, they did not individually notify the 533 million users whose personal data was breached as they believe it was not an issue the users could fix themselves.")
+  
+  elif topic.lower() == "c":
+    break
+  
+  else:
+    print("Sorry, I didn't catch that. Choose one of the options listed.")
+  
+  input("Press enter to continue\n")
+
+
+#Introduces my take
+print("\nI'm excited to share my perspective with you. Are you ready to hear my take?")
+giveInfo = input("Type 'yes' or 'no'\n")
+
+#Shares my take
+while giveInfo.lower() == "yes":
+  print("What would you like to learn more about? Enter the lowercase letter of the following options: \n(a) relation to CIA, (b) my reaction, (c) my advice, (d) none.")
+  topic = input()
+  
+  if topic.lower() == "a":
+    print("This breach relates to confidentiality as a group of hackers, who exploited a vulnerability in Facebook’s contact importer, violated Facebook's terms of service and scraped users’ profile data by exploiting this tool. Most of the scraped data was tied to users’ phone numbers, and 2.5 million email addresses were obtained.")
+  
+  elif topic.lower() == "b":
+    print("We disagree with Facebook’s response because they did not notify the 530 million users whose personal data had been scraped. It was the user's information that had been leaked, therefore it was only right for them to know in order to take further actions, such as changing the passwords of all the accounts, etc.")
+  
+  elif topic.lower() == "c":
+    print("I would convince victims to take action by checking out the Have I Been Pwned website to see which accounts have been exposed to data breach. I will then ask them to change the passwords to all of their accounts and to immediately call the bank if any of their personal information has been leaked. \nMy advice would be to not include as much valuable personal information online and to make sure that all your accounts have different passwords, therefore if one account has been leaked, hackers would not have access to other accounts.")
+
+  elif topic.lower() == "d":
+    break
+  
+  else:
+    print("Sorry, I didn't catch that. Choose one of the options listed.")
+  
+  input("Press enter to continue\n")
+
+#Chatbot ends conversation
+print("Thanks for chatting with me, and I hope you learned something new!")
