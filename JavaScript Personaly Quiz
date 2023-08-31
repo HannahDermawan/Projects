@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Personality Quiz</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- import the webpage's stylesheet -->
+	<link rel="stylesheet" href="/style.css">
+
+	<!-- import the webpage's javascript file -->
+	<script src="/script.js" defer>
+
+	</script>
+</head>
+
+<body>
+
+	<header>
+		<h1>Personality Quiz!</h1>
+		<p>We'll tell you if you are a social person or a homebody based on your personality!</p>
+	</header>
+
+	<main>
+
+		<h2>Being in the crowd makes you feel : </h2>
+		<div class="question">
+
+			<div class="answer-choice">
+				<img src="JS-HappyFace.jpeg" alt="Happy Fce">
+        <br>
+        <button id="q1a1">Happy</button>
+      </div>
+
+      <div class="answer-choice">
+        <img src="JS-SadFace.webp" alt="Questioning about life">
+        <br>
+        <button id="q1a2">Why am I here?</button>
+      </div>
+
+    </div> 
+    
+    <h2>Being around people makes you feel :</h2>
+    <div class="question">
+
+      <div class="answer-choice">
+        <img src="JS - Energized.jpeg" alt="Energetic">
+        <br>
+        <button id="q2a1">Energized</button>
+      </div>
+
+      <div class="answer-choice">
+        <img src="JS - Tired.jpeg" alt="Tired">
+        <br>
+        <button id="q2a2">Tired</button>
+      </div>
+
+    </div> 
+    
+    <h2>How do you like to spend your free time?</h2>
+    <div class="question">
+
+      <div class="answer-choice">
+        <img src="JS - Play.jpeg" alt="Go outside or play with friends">
+        <br>
+        <button id="q3a1">Go outside or play with friends</button>
+      </div>
+
+      <div class="answer-choice">
+        <img src="JS - Chill.jpeg" alt="Chill">
+        <br>
+        <button id="q3a2">Chill at home</button>
+      </div>
+
+    </div> 
+    
+    <h2 id="result">You are a...</h2>
+    <button id="restart">Restart</button>
+    
+  </main>
+  </body>
+</html>
