@@ -1,0 +1,38 @@
+package deque;
+
+import java.util.Comparator;
+
+public class MaxArrayDeque61B<T> extends ArrayDeque61B<T> {
+    private Comparator<T> comparator;
+    public MaxArrayDeque61B(Comparator<T> c) {
+        super();
+        this.comparator = c;
+    }
+
+    public T max() {
+        if (isEmpty()) {
+            return null;
+        }
+        T maxElement = get(0);
+        for (T x : this) {
+            if (comparator.compare(x, maxElement) > 0) {
+                maxElement = x;
+            }
+        }
+        return maxElement;
+
+    }
+
+    public T max(Comparator<T> c) {
+        if (isEmpty()) {
+            return null;
+        }
+        T maxElement = get(0);
+        for (T y : this) {
+            if (c.compare(y, maxElement) > 0) {
+                maxElement = y;
+            }
+        }
+        return maxElement;
+    }
+}
