@@ -1,0 +1,119 @@
+import java.util.ArrayList;
+import java.util.List;
+public class ArrayDeque61B<T> implements Deque61B<T> {
+    private T[] items;
+    private int size;
+    private int firstpointer;
+
+    public ArrayDeque61B() {
+        items = (T[]) new Object[8];
+        size = 0;
+        firstpointer = 7;
+
+    }
+
+    private void resize(int capacity) {
+        T[] a = (T[]) new Object[capacity];
+        for (int i = 0; i < size; i++) {
+            a[i] = items[Math.floorMod(firstpointer + i, items.length)];
+        }
+        items = a;
+        firstpointer = 0;
+    }
+
+    @Override
+    public void addFirst(T x) {
+        if (size == items.length) {
+            resize(items.length * 2);
+        }
+        firstpointer = Math.floorMod(firstpointer - 1, items.length);
+        items[firstpointer] = x;
+        size += 1;
+    }
+
+    @Override
+    public void addLast(T x) {
+        if (size == items.length) {
+            resize(items.length * 2);
+        }
+        int lastpointer = Math.floorMod(firstpointer + size, items.length);
+        items[lastpointer] = x;
+        size += 1;
+
+    }
+
+    @Override
+    public List<T> toList() {
+        List<T> returnList = new ArrayList<>();
+        int currentpointer = firstpointer;
+        for (int i = 0; i < size; i++) {
+            returnList.add(items[currentpointer]);
+            currentpointer = Math.floorMod(currentpointer + 1, items.length);
+        }
+        return returnList;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        if (size == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
+        if (size <= 0.25 * items.length) {
+            resizeDown(items.length / 2);
+        }
+        T x = items[firstpointer];
+        firstpointer = Math.floorMod(firstpointer + 1, items.length);
+        size -= 1;
+        return x;
+    }
+
+    @Override
+    public T removeLast() {
+        if (size == 0) {
+            size = 0;
+            return null;
+        }
+        if (size <= 0.25 * items.length) {
+            resizeDown(items.length / 2);
+        }
+        int lastpointer = Math.floorMod(firstpointer + (size - 1), items.length);
+        T y = items[lastpointer];
+        size -= 1;
+        return y;
+    }
+
+    private void resizeDown(int capacity) {
+        T[] b = (T[]) new Object[capacity];
+        for (int i = 0; i < size; i++) {
+            b[i] = items[Math.floorMod(firstpointer + i, items.length)];
+        }
+        firstpointer = 0;
+        items = b;
+    }
+
+    @Override
+    public T get(int index) {
+        if (index > size || index < 0) {
+            return null;
+        }
+        return items[Math.floorMod(firstpointer + index, items.length)];
+    }
+
+    @Override
+    public T getRecursive(int index) {
+        throw new UnsupportedOperationException("Not implemented for ArrayDeque");
+    }
+}
